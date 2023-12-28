@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inscrição para Ensino Confirmatório</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+    }
+
+    .form-container {
+      max-width: 800px;
+      margin: 20px auto;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .form-section {
+      padding: 20px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .form-section h2 {
+      color: #4285f4;
+    }
+
+    .form-section p {
+      color: #666;
+    }
+
+    .form-section:last-child {
+      border-bottom: none;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="date"],
+    input[type="tel"],
+    input[type="file"] {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 16px;
+      box-sizing: border-box;
+    }
+
+    select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 16px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #4285f4;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+    <script>
+        function enviarDadosParaAPI() {
+          var urlApi = 'AKfycbx8nWGnDSdkptqDzpbvJ14URFK5smylCYeZojh9VbCcT9iimZlqA0HOck_0mO7cWnQHFg'; // Substitua pela URL real da API web
+          var dadosDoFormulario = {
+            comunidade: document.getElementById('comunidade').value,
+            comprovanteContribuicao: document.getElementById('comprovanteContribuicao').value,
+            nomeCompleto: document.getElementById('nomeCompleto').value,
+            dataNascimento: document.getElementById('dataNascimento').value,
+            fotoCertidaoNascimento: document.getElementById('fotoCertidaoNascimento').value,
+            local: document.getElementById('local').value,
+            dataBatismo: document.getElementById('dataBatismo').value,
+            fotoCertidaoBatismo: document.getElementById('fotoCertidaoBatismo').value,
+            comunidadeBatismo: document.querySelector('input[name="comunidadeBatismo"]:checked').value,
+            padrinhosMadrinhas: document.getElementById('padrinhosMadrinhas').value,
+            nomePai: document.getElementById('nomePai').value,
+            nomeConjugePai: document.getElementById('nomeConjugePai').value,
+            dataNascimentoPai: document.getElementById('dataNascimentoPai').value,
+            dataBatismoPai: document.getElementById('dataBatismoPai').value,
+            dataConfirmacaoPai: document.getElementById('dataConfirmacaoPai').value,
+            dataCasamentoCivilPai: document.getElementById('dataCasamentoCivilPai').value,
+            dataBencaoMatrimonialPai: document.getElementById('dataBencaoMatrimonialPai').value,
+            nomeMae: document.getElementById('nomeMae').value,
+            nomeConjugeMae: document.getElementById('nomeConjugeMae').value,
+            dataNascimentoMae: document.getElementById('dataNascimentoMae').value,
+            dataBatismoMae: document.getElementById('dataBatismoMae').value,
+            dataConfirmacaoMae: document.getElementById('dataConfirmacaoMae').value,
+            dataCasamentoCivilMae: document.getElementById('dataCasamentoCivilMae').value,
+            dataBencaoMatrimonialMae: document.getElementById('dataBencaoMatrimonialMae').value,
+            rua: document.getElementById('rua').value,
+            numeroResidencia: document.getElementById('numeroResidencia').value,
+            bairro: document.getElementById('bairro').value,
+            cidade: document.getElementById('cidade').value,
+            estado: document.getElementById('estado').value,
+            celular: document.getElementById('celular').value,
+          };
+    
+          // Enviar dados para a API
+          fetch(urlApi, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams(dadosDoFormulario),
+          })
+          .then(response => response.text())
+          .then(data => {
+            console.log('Dados enviados para a API:', data);
+    
+            // Após o envio para a API, enviar mensagem por WhatsApp
+            enviarWhatsapp();
+          })
+          .catch(error => console.error('Erro ao enviar dados para a API:', error));
+        }
+
+    function enviarWhatsapp() {
+      var numero = "+5551997858249";
+      var mensagem = "Inscrição para Ensino Confirmatório:\n\n";
+
+      var campos = document.querySelectorAll('input, select');
+      campos.forEach(function(campo) {
+        mensagem += campo.previousElementSibling.textContent.replace('*', '').trim() + ': ' + campo.value + '\n';
+      });
+
+      mensagem = encodeURIComponent(mensagem);
+
+      if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        window.location.href = "whatsapp://send?text=" + mensagem + "&phone=" + numero;
+      } else {
+        window.open("https://web.whatsapp.com/send?text=" + mensagem + "&phone=" + numero);
+      }
+    }
+  </script>
+</head>
+<body>
+
+    
+<div class="form-container">
+  <div class="form-section">
+    <h2>Inscrição para Ensino Confirmatório</h2>
+    <p>Instruções:</p>
+    <ul>
+      <li>Quem é inscrito são adolescentes que completam 12 anos em 2023 (nascidos em 2011).</li>
+      <li>Antes do início dos encontros, será realizada uma reunião para combinações de datas e outros eventos.</li>
+      <li>Pedimos a gentileza que sejam preenchidos todos os dados possíveis, para que façamos a atualização cadastral junto aos nossos arquivos.</li>
+      <li>Ao final da página, clique em próximo para a continuar a preencher os dados.</li>
+      <li>Ao final, clique em Enviar para finalizar a inscrição. Receberemos a inscrição e será criado um grupo no WhatsApp para divulgação de outras informações.</li>
+      <li>Em caso de dificuldade para o preenchimento, entre em contato pelo número: (51) 99785-8249 ou (51) 99596-7867.</li>
+    </ul>
+  </div>
+
+  <div class="form-section">
+    <h2>Informações do Confirmando ou Confirmanda</h2>
+    <label for="comunidade">Comunidade em que participa*:</label>
+    <select id="comunidade" name="comunidade" required>
+      <option value="campoDoMeio">Campo do Meio</option>
+      <option value="costaDaSerra">Costa da Serra</option>
+      <option value="santosReis">Santos Reis</option>
+      <option value="sangaFunda">Sanga Funda</option>
+    </select>
+  </div>
+
+  <div class="form-section">
+    <label for="nomeCompleto">Nome completo do/a confirmando/a*:</label>
+    <input type="text" id="nomeCompleto" name="nomeCompleto" required>
+  </div>
+
+  <div class="form-section">
+    <label for="dataNascimento">Data de nascimento*:</label>
+    <input type="date" id="dataNascimento" name="dataNascimento" required>
+  </div>
+
+  <div class="form-section">
+    <label for="fotoCertidaoNascimento">Foto da Certidão de Nascimento do Confirmando ou confirmanda* (tipo upload de arquivo):</label>
+    <input type="file" id="fotoCertidaoNascimento" name="fotoCertidaoNascimento" required>
+  </div>
+
+  <div class="form-section">
+    <label for="local">Local*:</label>
+    <input type="text" id="local" name="local" required>
+  </div>
+
+  <div class="form-section">
+    <label for="dataBatismo">Data de Batismo*:</label>
+    <input type="date" id="dataBatismo" name="dataBatismo" required>
+  </div>
+
+  <div class="form-section">
+    <label for="fotoCertidaoBatismo">Foto da Certidão de Batismo* (tipo upload de arquivo):</label>
+    <input type="file" id="fotoCertidaoBatismo" name="fotoCertidaoBatismo" required>
+  </div>
+
+  <div class="form-section">
+    <label for="comunidadeBatismo">Comunidade em que foi Batizado (a)*:</label>
+    <select id="comunidadeBatismo" name="comunidadeBatismo" required>
+      <option value="campoDoMeio">Campo do Meio</option>
+      <option value="costaDaSerra">Costa da Serra</option>
+      <option value="santosReis">Santos Reis</option>
+      <option value="sangaFunda">Sanga Funda</option>
+    </select>
+  </div>
+
+  <div class="form-section">
+    <label for="nomePadrinhosMadrinhas">Nome dos Padrinhos e Madrinhas*:</label>
+    <input type="text" id="nomePadrinhosMadrinhas" name="nomePadrinhosMadrinhas" required>
+  </div>
+
+  <div class="form-section">
+    <h2>Informações dos pais</h2>
+    <label for="nomePai">Nome do Pai*:</label>
+    <input type="text" id="nomePai" name="nomePai" required>
+  </div>
+
+  <div class="form-section">
+    <label for="comprovanteContribuicao">Comprovante de quitação de contribuição de 2023* (tipo upload de arquivo):</label>
+    <input type="file" id="comprovanteContribuicao" name="comprovanteContribuicao" required>
+  </div>
+
+  <div class="form-section">
+    <label for="nomeConjugePai">Nome do Cônjuge:</label>
+    <input type="text" id="nomeConjugePai" name="nomeConjugePai">
+  </div>
+
+  <div class="form-section">
+    <label for="dataNascimentoPai">Data de Nascimento do pai*:</label>
+    <input type="date" id="dataNascimentoPai" name="dataNascimentoPai" required>
+  </div>
+
+  <div class="form-section">
+    <label for="dataBatismoPai">Data de Batismo*:</label>
+    <input type="date" id="dataBatismoPai" name="dataBatismoPai" required>
+  </div>
+
+  <div class="form-section">
+    <label for="dataConfirmacaoPai">Data de Confirmação:</label>
+    <input type="date" id="dataConfirmacaoPai" name="dataConfirmacaoPai">
+  </div>
+
+  <div class="form-section">
+    <label for="dataCasamentoCivilPai">Data de casamento (civil):</label>
+    <input type="date" id="dataCasamentoCivilPai" name="dataCasamentoCivilPai">
+  </div>
+
+  <div class="form-section">
+    <label for="dataBencaoMatrimonialPai">Data de bênção matrimonial (igreja):</label>
+    <input type="date" id="dataBencaoMatrimonialPai" name="dataBencaoMatrimonialPai">
+  </div>
+
+  <div class="form-section">
+    <label for="nomeMae">Nome da Mãe*:</label>
+    <input type="text" id="nomeMae" name="nomeMae" required>
+  </div>
+
+  <div class="form-section">
+    <label for="nomeConjugeMae">Nome do Cônjuge:</label>
+    <input type="text" id="nomeConjugeMae" name="nomeConjugeMae">
+  </div>
+
+  <div class="form-section">
+    <label for="dataNascimentoMae">Data de Nascimento da mãe*:</label>
+    <input type="date" id="dataNascimentoMae" name="dataNascimentoMae" required>
+  </div>
+
+  <div class="form-section">
+    <label for="dataBatismoMae">Data de Batismo*:</label>
+    <input type="date" id="dataBatismoMae" name="dataBatismoMae" required>
+  </div>
+
+  <div class="form-section">
+    <label for="dataConfirmacaoMae">Data de Confirmação:</label>
+    <input type="date" id="dataConfirmacaoMae" name="dataConfirmacaoMae">
+  </div>
+
+  <div class="form-section">
+    <label for="dataCasamentoCivilMae">Data de casamento (civil):</label>
+    <input type="date" id="dataCasamentoCivilMae" name="dataCasamentoCivilMae">
+  </div>
+
+  <div class="form-section">
+    <label for="dataBencaoMatrimonialMae">Data de bênção matrimonial (igreja):</label>
+    <input type="date" id="dataBencaoMatrimonialMae" name="dataBencaoMatrimonialMae">
+  </div>
+
+  <div class="form-section">
+    <h2>Informações de endereço</h2>
+    <label for="rua">Rua:</label>
+    <input type="text" id="rua" name="rua">
+  </div>
+
+  <div class="form-section">
+    <label for="numeroResidencia">Número da residência:</label>
+    <input type="text" id="numeroResidencia" name="numeroResidencia">
+  </div>
+
+  <div class="form-section">
+    <label for="bairro">Bairro:</label>
+    <input type="text" id="bairro" name="bairro">
+  </div>
+
+  <div class="form-section">
+    <label for="cidade">Cidade:</label>
+    <input type="text" id="cidade" name="cidade">
+  </div>
+
+  <div class="form-section">
+    <label for="estado">Estado:</label>
+    <input type="text" id="estado" name="estado">
+  </div>
+
+  <div class="form-section">
+    <label for="celular">Celular (número com WhatsApp)*:</label>
+    <input type="tel" id="celular" name="celular" required>
+  </div>
+
+  <div class="form-section">
+    <button type="button" onclick="enviarWhatsapp()">Enviar via WhatsApp</button>
+  </div>
+</div>
+
+</body>
+</html>
